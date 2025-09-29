@@ -1,41 +1,47 @@
-
 import React from 'react';
 import { CheckIcon } from './icons/CheckIcon';
 
-const XIcon: React.FC<{ className?: string }> = ({ className }) => (
-    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-    </svg>
-);
-
+const proofs = [
+  {
+    title: "Proses Panen Lestari",
+    description: "Kami hanya memanen madu secukupnya dan memastikan koloni lebah tetap sehat dan berkembang biak.",
+    image: "https://picsum.photos/400/250?image=1060"
+  },
+  {
+    title: "Hasil Uji Laboratorium",
+    description: "Setiap batch madu kami diuji di laboratorium independen untuk memastikan kemurnian dan kualitasnya.",
+    image: "https://picsum.photos/400/250?image=119"
+  },
+  {
+    title: "Sertifikasi Halal MUI",
+    description: "Produk kami telah melalui proses verifikasi dan dijamin halal oleh Majelis Ulama Indonesia.",
+    image: "https://picsum.photos/400/250?image=11"
+  },
+  {
+    title: "Garansi 100% Murni",
+    description: "Kami memberikan garansi uang kembali jika madu kami terbukti tidak asli. Kepuasan Anda adalah prioritas kami.",
+    image: "https://picsum.photos/400/250?image=20"
+  }
+];
 
 const AuthenticitySection: React.FC = () => {
   return (
     <section id="authenticity" className="py-20 bg-amber-50">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-stone-800">Cara Membedakan Madu Asli vs Palsu</h2>
-          <p className="text-stone-600 mt-4 max-w-2xl mx-auto">Jadilah konsumen cerdas. Kami bantu Anda mengenali madu murni yang sesungguhnya.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-stone-800">Bukti Keaslian & Transparansi</h2>
+          <p className="text-stone-600 mt-4 max-w-2xl mx-auto">Kami tidak hanya berkata 'asli', kami menunjukkannya. Inilah jaminan kualitas Madu Al-Qubro.</p>
         </div>
-        <div className="flex flex-col md:flex-row gap-8 justify-center">
-          <div className="bg-white rounded-lg shadow-xl p-8 md:w-1/2 lg:w-2/5">
-            <h3 className="text-2xl font-bold text-green-600 mb-6 text-center">Madu Asli Kami</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start"><CheckIcon className="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" /><span>Tidak larut sempurna di air, akan mengendap di dasar.</span></li>
-              <li className="flex items-start"><CheckIcon className="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" /><span>Jika dipanaskan, akan berkaramel, tidak berbusa banyak.</span></li>
-              <li className="flex items-start"><CheckIcon className="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" /><span>Dapat mengkristal jika disimpan di suhu dingin, ini tanda alami.</span></li>
-              <li className="flex items-start"><CheckIcon className="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0" /><span>Memiliki aroma dan rasa khas bunga hutan yang kompleks.</span></li>
-            </ul>
-          </div>
-          <div className="bg-stone-800 text-white rounded-lg shadow-xl p-8 md:w-1/2 lg:w-2/5">
-            <h3 className="text-2xl font-bold text-red-500 mb-6 text-center">Madu Palsu / Oplosan</h3>
-            <ul className="space-y-4">
-              <li className="flex items-start"><XIcon className="w-6 h-6 text-red-500 mr-3 mt-1 flex-shrink-0" /><span>Larut dengan mudah di dalam air seperti sirup gula.</span></li>
-              <li className="flex items-start"><XIcon className="w-6 h-6 text-red-500 mr-3 mt-1 flex-shrink-0" /><span>Saat dipanaskan akan mendidih dan berbusa karena kandungan gula.</span></li>
-              <li className="flex items-start"><XIcon className="w-6 h-6 text-red-500 mr-3 mt-1 flex-shrink-0" /><span>Tidak akan pernah mengkristal, bahkan di dalam freezer sekalipun.</span></li>
-              <li className="flex items-start"><XIcon className="w-6 h-6 text-red-500 mr-3 mt-1 flex-shrink-0" /><span>Rasanya hanya manis satu dimensi tanpa aroma khas.</span></li>
-            </ul>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {proofs.map((proof, index) => (
+            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-transform">
+              <img src={proof.image} alt={proof.title} className="w-full h-48 object-cover" />
+              <div className="p-6">
+                <h3 className="font-bold text-xl text-stone-800 mb-2">{proof.title}</h3>
+                <p className="text-stone-600 text-sm">{proof.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

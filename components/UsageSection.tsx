@@ -1,36 +1,65 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { BookIcon } from './icons/BookIcon';
+import { SpoonIcon } from './icons/SpoonIcon';
 
 const UsageSection: React.FC = () => {
-  return (
-    <section id="usage" className="py-20 bg-amber-50">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-stone-800">Cara Konsumsi & Penyimpanan</h2>
-          <p className="text-stone-600 mt-4 max-w-2xl mx-auto">Dapatkan manfaat maksimal dengan cara penggunaan dan penyimpanan yang tepat.</p>
-        </div>
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h3 className="font-bold text-xl mb-4 text-amber-600">Cara Konsumsi</h3>
-            <ul className="list-disc list-inside space-y-2 text-stone-700">
-              <li><strong>Dewasa:</strong> 1-2 sendok makan, 2 kali sehari.</li>
-              <li><strong>Anak-anak ({'>'}1 tahun):</strong> 1 sendok teh, 2 kali sehari.</li>
-              <li>Dapat dikonsumsi langsung atau dicampur dengan air hangat (jangan air panas), teh, atau yogurt.</li>
-              <li>Sangat baik dikonsumsi pagi hari sebelum sarapan dan malam hari sebelum tidur.</li>
-            </ul>
-          </div>
-          <div className="bg-white p-8 rounded-lg shadow-lg">
-            <h3 className="font-bold text-xl mb-4 text-amber-600">Cara Penyimpanan</h3>
-            <ul className="list-disc list-inside space-y-2 text-stone-700">
-              <li>Simpan di suhu ruang yang sejuk dan kering.</li>
-              <li>Hindari paparan sinar matahari langsung.</li>
-              <li>Tidak perlu disimpan di dalam kulkas.</li>
-              <li>Gunakan sendok kering dan bersih untuk mengambil madu agar tidak terkontaminasi.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+    const [timeLeft, setTimeLeft] = useState({ hours: 23, minutes: 59, seconds: 59 });
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTimeLeft(prevTime => {
+                let { hours, minutes, seconds } = prevTime;
+                if (seconds > 0) {
+                    seconds--;
+                } else if (minutes > 0) {
+                    seconds = 59;
+                    minutes--;
+                } else if (hours > 0) {
+                    seconds = 59;
+                    minutes = 59;
+                    hours--;
+                } else {
+                    clearInterval(timer);
+                    return { hours: 0, minutes: 0, seconds: 0 };
+                }
+                return { hours, minutes, seconds };
+            });
+        }, 1000);
+
+        return () => clearInterval(timer);
+    }, []);
+
+    const formatTime = (time: number) => time.toString().padStart(2, '0');
+
+    return (
+        <section id="promo" className="py-12 bg-stone-800 text-white">
+            <div className="container mx-auto px-6 text-center">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 animate-pulse">🎁 🔥 PROMO KHUSUS HARI INI!</h2>
+                <div className="max-w-3xl mx-auto bg-white/10 p-6 rounded-lg">
+                    <p className="text-lg md:text-xl mb-4">
+                        Beli 2 Botol (varian apa saja), dapatkan <span className="font-bold text-amber-400">GRATIS</span>:
+                    </p>
+                    <div className="flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8 mb-6 text-left">
+                        <div className="flex items-center gap-3">
+                            <SpoonIcon className="w-8 h-8 text-amber-300 flex-shrink-0" />
+                            <span className="font-semibold text-lg">1 Sendok Kayu Premium</span>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <BookIcon className="w-8 h-8 text-amber-300 flex-shrink-0" />
+                            <span className="font-semibold text-lg">Ebook "7 Resep Sehat Madu"</span>
+                        </div>
+                    </div>
+                    <div className="text-amber-400 font-bold mb-4">Stok terbatas – hanya untuk 20 pemesan pertama hari ini!</div>
+                    <div className="flex justify-center items-center gap-4">
+                        <span className="text-lg">Penawaran Berakhir Dalam:</span>
+                        <div className="bg-white text-stone-800 font-bold text-2xl px-3 py-1 rounded-md">
+                            {`${formatTime(timeLeft.hours)}:${formatTime(timeLeft.minutes)}:${formatTime(timeLeft.seconds)}`}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
 };
 
 export default UsageSection;

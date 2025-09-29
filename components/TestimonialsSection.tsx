@@ -1,11 +1,10 @@
-
 import React from 'react';
 import { StarIcon } from './icons/StarIcon';
 
 const testimonials = [
-  { name: "Andi Wijaya", location: "Jakarta", text: "Batuk anak saya sembuh total setelah rutin minum madu ini. Rasanya enak, tidak terlalu manis. Asli beda dari yang lain!", rating: 5, image: "https://picsum.photos/100/100?random=1" },
-  { name: "Siti Aminah", location: "Bandung", text: "Saya pakai untuk masker wajah, kulit jadi lebih lembap dan cerah. Madunya kental dan wangi. Pengiriman juga cepat dan aman.", rating: 5, image: "https://picsum.photos/100/100?random=2" },
-  { name: "Budi Santoso", location: "Surabaya", text: "Stamina jadi lebih fit sejak konsumsi madu hutan ini setiap pagi. Benar-benar murni, terasa dari aromanya. Highly recommended!", rating: 5, image: "https://picsum.photos/100/100?random=3" },
+  { name: "Ibu Rina", location: "Bandung", text: "Anak saya yang susah makan, sejak dikasih Madu Klanceng Al-Qubro, nafsu makannya naik! Rasanya agak asam jadi anak saya suka. Terima kasih!", rating: 5, image: "https://picsum.photos/100/100?random=1" },
+  { name: "Bapak Agung", location: "Yogyakarta", text: "Saya rutin minum Madu Hutan setiap pagi. Badan jadi lebih bugar dan tidak gampang capek. Kualitasnya terasa beda, lebih kental dan aromanya khas.", rating: 5, image: "https://picsum.photos/100/100?random=2" },
+  { name: "Andini Putri", location: "Jakarta", text: "Paket sampai dengan aman, packingnya tebal banget. Madu Randunya enak, lembut di tenggorokan. Pas banget buat saya yang sering radang.", rating: 5, image: "https://picsum.photos/100/100?random=3" },
 ];
 
 const TestimonialsSection: React.FC = () => {
@@ -13,8 +12,8 @@ const TestimonialsSection: React.FC = () => {
     <section id="testimonials" className="py-20 bg-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-stone-800">Apa Kata Mereka?</h2>
-          <p className="text-stone-600 mt-4 max-w-2xl mx-auto">Testimoni asli dari pelanggan setia yang telah merasakan khasiat madu kami.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-stone-800">Apa Kata Pelanggan Setia Kami?</h2>
+          <p className="text-stone-600 mt-4 max-w-2xl mx-auto">Testimoni asli dari keluarga yang telah merasakan langsung manfaat Madu Al-Qubro.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (

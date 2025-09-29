@@ -1,13 +1,12 @@
-
 import React, { useState } from 'react';
 import { ChevronDownIcon } from './icons/ChevronDownIcon';
 
 const faqs = [
-  { q: "Madunya bisa untuk bayi?", a: "Tidak disarankan untuk bayi di bawah usia 1 tahun karena sistem pencernaan mereka belum cukup kuat untuk memproses spora alami yang mungkin ada dalam madu mentah." },
-  { q: "Kenapa madunya mengkristal?", a: "Kristalisasi adalah proses alami pada madu murni karena kandungan glukosa yang lebih tinggi dari fruktosa. Ini justru tanda keaslian madu, bukan berarti rusak. Cukup rendam botol di air hangat untuk mencairkannya kembali." },
-  { q: "Ada sertifikat halal?", a: "Ya, produk kami telah mendapatkan sertifikat Halal dari MUI dengan nomor registrasi XXX-XXXX-XXXX." },
-  { q: "Apakah bisa bayar di tempat (COD)?", a: "Saat ini kami belum melayani COD. Namun, kami memberikan garansi uang kembali jika Anda tidak puas dengan produk kami untuk menjamin keamanan transaksi Anda." },
-  { q: "Apa madu ini aman untuk ibu hamil/menyusui?", a: "Ya, madu kami aman dan sangat dianjurkan untuk ibu hamil dan menyusui karena dapat meningkatkan daya tahan tubuh dan kualitas ASI. Namun, tetap konsultasikan dengan dokter Anda jika memiliki kondisi medis tertentu." },
+  { q: "Bisa untuk bayi?", a: "Madu murni tidak disarankan untuk anak di bawah usia 1 tahun karena sistem pencernaan mereka belum sempurna." },
+  { q: "Kenapa madunya mengkristal? Apakah ini tanda rusak?", a: "Justru sebaliknya! Kristalisasi adalah proses alami pada madu murni karena kandungan glukosa alaminya. Ini adalah salah satu tanda keaslian madu. Cukup rendam botol di air hangat untuk mencairkannya kembali." },
+  { q: "Apakah ada campuran gula tambahan?", a: "Tidak. Kami memberikan garansi 100% uang kembali jika madu kami terbukti mengandung gula tambahan. Murni dari nektar bunga." },
+  { q: "Bisa bayar di tempat (COD)?", a: "Saat ini kami belum melayani COD untuk menjaga efisiensi pengiriman. Namun, kami menjamin keamanan transaksi Anda dengan garansi uang kembali jika madu tidak asli." },
+  { q: "Bagaimana cara menyimpannya?", a: "Cukup simpan di suhu ruang, tutup rapat, dan hindari sinar matahari langsung. Tidak perlu dimasukkan ke dalam kulkas." },
 ];
 
 const FaqItem: React.FC<{ faq: { q: string; a: string } }> = ({ faq }) => {
@@ -36,8 +35,8 @@ const FAQSection: React.FC = () => {
     <section id="faq" className="py-20 bg-white">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-stone-800">Pertanyaan yang Sering Diajukan</h2>
-          <p className="text-stone-600 mt-4 max-w-2xl mx-auto">Masih ragu? Temukan jawaban atas pertanyaan Anda di sini.</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-stone-800">Masih Ada Pertanyaan?</h2>
+          <p className="text-stone-600 mt-4 max-w-2xl mx-auto">Kami jawab semua keraguan Anda di sini.</p>
         </div>
         <div className="max-w-3xl mx-auto">
           {faqs.map((faq, index) => (

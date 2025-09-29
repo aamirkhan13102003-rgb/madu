@@ -1,41 +1,99 @@
-
-import React from 'react';
-
-const pricingData = [
-  { size: "250gr", price: "Rp 85.000", popular: false, features: ["Ukuran Coba", "Praktis dibawa", "Cocok untuk 1 orang"] },
-  { size: "500gr", price: "Rp 150.000", popular: true, features: ["Paling Laris", "Untuk keluarga kecil", "Bonus 1 sendok kayu"] },
-  { size: "1kg", price: "Rp 280.000", popular: false, features: ["Paket Hemat", "Stok 1-2 bulan", "Diskon 10%"] },
-];
+import React, { useState } from 'react';
+import { WhatsappIcon } from './icons/WhatsappIcon';
 
 const PricingSection: React.FC = () => {
-    const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+  const [name, setName] = useState('');
+  const [whatsapp, setWhatsapp] = useState('');
+  const [honeyType, setHoneyType] = useState('Madu Hutan');
+  const [quantity, setQuantity] = useState(1);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!name || !whatsapp || quantity < 1) {
+      alert('Mohon lengkapi semua data dengan benar.');
+      return;
     }
-  };
+
+    const phoneNumber = "6289678686515"; // Target number without '+'
+    const message = `Halo Madu Al-Qubro, saya mau pesan:
+- Nama: ${name}
+- Jenis Madu: ${honeyType}
+- Jumlah: ${quantity} Botol
+
+Mohon konfirmasi total dan ongkirnya. Terima kasih.`;
     
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
-    <section id="pricing" className="py-20 bg-white">
+    <section id="order-form" className="py-20 bg-white">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-stone-800">Varian & Paket Tersedia</h2>
-          <p className="text-stone-600 mt-4 max-w-2xl mx-auto">Pilih ukuran yang paling sesuai dengan kebutuhan harian Anda dan keluarga.</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-          {pricingData.map((plan, index) => (
-            <div key={index} className={`relative border rounded-lg p-8 text-center transition-transform transform ${plan.popular ? 'bg-amber-100 border-amber-500 scale-105 shadow-2xl' : 'bg-white border-stone-200 shadow-lg hover:shadow-xl hover:-translate-y-2'}`}>
-              {plan.popular && <div className="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-amber-500 text-white text-sm font-bold px-4 py-1 rounded-full">Paling Populer</div>}
-              <h3 className="text-2xl font-bold text-stone-800 mb-2">{plan.size}</h3>
-              <p className="text-4xl font-extrabold text-amber-600 mb-6">{plan.price}</p>
-              <ul className="space-y-3 text-stone-600 mb-8">
-                {plan.features.map((feature, i) => <li key={i}>{feature}</li>)}
-              </ul>
-              <a href="#cta" onClick={(e) => { e.preventDefault(); scrollToSection('cta'); }} className={`w-full block font-bold py-3 px-6 rounded-full transition-colors ${plan.popular ? 'bg-amber-500 text-white hover:bg-amber-600' : 'bg-stone-800 text-white hover:bg-stone-700'}`}>
-                Pesan Ukuran {plan.size}
-              </a>
+        <div className="max-w-2xl mx-auto bg-amber-100 p-8 md:p-12 rounded-2xl shadow-2xl">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-stone-800">✅ Pesan Sekarang!</h2>
+            <p className="text-stone-600 mt-2">Langsung Dikirim Hari Ini!</p>
+          </div>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label htmlFor="name" className="block text-stone-700 font-semibold mb-2">Nama Lengkap</label>
+              <input 
+                type="text" 
+                id="name" 
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" 
+                placeholder="cth: Budi Santoso"
+                required 
+              />
             </div>
-          ))}
+            <div>
+              <label htmlFor="whatsapp" className="block text-stone-700 font-semibold mb-2">Nomor WhatsApp</label>
+              <input 
+                type="tel" 
+                id="whatsapp" 
+                value={whatsapp}
+                onChange={(e) => setWhatsapp(e.target.value)}
+                className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" 
+                placeholder="cth: 081234567890"
+                required 
+              />
+            </div>
+            <div>
+              <label htmlFor="honeyType" className="block text-stone-700 font-semibold mb-2">Jenis Madu</label>
+              <select 
+                id="honeyType" 
+                value={honeyType}
+                onChange={(e) => setHoneyType(e.target.value)}
+                className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 bg-white"
+                required
+              >
+                <option>Madu Hutan</option>
+                <option>Madu Randu</option>
+                <option>Madu Klanceng</option>
+                <option>Paket Campur</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="quantity" className="block text-stone-700 font-semibold mb-2">Jumlah Botol</label>
+              <input 
+                type="number" 
+                id="quantity" 
+                value={quantity}
+                onChange={(e) => setQuantity(parseInt(e.target.value))}
+                min="1"
+                className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500" 
+                required 
+              />
+            </div>
+            <button type="submit" className="w-full bg-amber-500 hover:bg-amber-600 text-white font-bold py-4 px-6 rounded-lg text-lg transition-transform transform hover:scale-105 shadow-lg flex items-center justify-center gap-3">
+              <WhatsappIcon className="w-6 h-6" />
+              KIRIM PESANAN
+            </button>
+            <p className="text-center text-stone-600 text-sm mt-4">
+              Kami akan konfirmasi stok & ongkir via WA dalam 15 menit!
+            </p>
+          </form>
         </div>
       </div>
     </section>
